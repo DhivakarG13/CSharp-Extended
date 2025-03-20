@@ -13,8 +13,8 @@ namespace CSVFilePractice
             people.Add(new Person("Dhivakar", 65.5, GenderOptions.Male));
             people.Add(new Person("Arav", 64.5, GenderOptions.Male));
             people.Add(new Person("Hemanth", 65.5, GenderOptions.Female));
-            peopleRepository.SaveToDatabaseSimple();
-            people = peopleRepository.LoadFromDatabaseSimple();
+            peopleRepository.SaveToDatabaseUsingCSVHelper();
+            people = peopleRepository.LoadFromDatabaseUsingCSVHelper();
             DisplayPeopleData(people);
             Console.ReadKey();
         }

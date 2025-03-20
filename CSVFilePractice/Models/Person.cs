@@ -1,4 +1,5 @@
 ﻿using CSVFilePractice.Constants;
+
 namespace CSVFilePractice.Models
 {
     public class Person
@@ -9,11 +10,11 @@ namespace CSVFilePractice.Models
 
         public GenderOptions Gender { get; set; }
 
-        public Person(string name, double weight, GenderOptions gender)
+        public Person(string Name, double Weight, GenderOptions Gender)
         {
-            Name = name;
-            Weight = weight;
-            Gender = gender;
+            this.Name = Name;
+            this.Weight = Weight;
+            this.Gender = Gender;
         }
     }
 }

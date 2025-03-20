@@ -2,7 +2,6 @@
 using CSVFilePractice.Constants;
 using CSVFilePractice.Models;
 using CsvHelper;
-using CsvHelper.Configuration;
 
 namespace CSVFilePractice.Repositories
 {
@@ -25,6 +24,7 @@ namespace CSVFilePractice.Repositories
                 using (StreamWriter streamWriter = new(fileStream))
                 {
                     streamWriter.WriteLine("Name,Weight,Gender");
+
                     foreach (Person person in People)
                     {
                         streamWriter.WriteLine($"{person.Name},{person.Weight},{(int)person.Gender}");
@@ -42,6 +42,7 @@ namespace CSVFilePractice.Repositories
                 {
                     streamReader.ReadLine(); // Ignoring Headers
                     string? LineData;
+
                     do
                     {
                         LineData = streamReader.ReadLine();
@@ -76,24 +77,20 @@ namespace CSVFilePractice.Repositories
         public List<Person> LoadFromDatabaseUsingCSVHelper()
         {
             List<Person> temporaryPeopleData = new List<Person>();
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                HeaderValidated = null,
-                MissingFieldFound = null
-            };
 
             if(!File.Exists(_fileName))
             {
                 return new List<Person>();
             }
+
             using (StreamReader streamReader = new(_fileName))
             {
-                streamReader.ReadLine();
-                using (var csv = new CsvReader(streamReader, config))
+                using (var csv = new CsvReader(streamReader, CultureInfo.InvariantCulture))
                 {
                     temporaryPeopleData = csv.GetRecords<Person>().ToList();
                 }
             }
+
             People = temporaryPeopleData;
             return People;
         }
